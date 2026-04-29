@@ -10,7 +10,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Data_Report.ViewModels;
 
-namespace Data_Report
+namespace Data_Report.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
