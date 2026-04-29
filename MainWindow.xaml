@@ -1,0 +1,89 @@
+﻿<Window x:Class="Data_Report.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Data_Report"
+        mc:Ignorable="d"
+        Title="Veri Raporlama Ekranı" Height="450" Width="800">
+    <Grid Background="#F8F9FA">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="White" Margin="15" CornerRadius="12" Padding="15" BorderBrush="#78C802" BorderThickness="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="10,0,40,0">
+                    <TextBlock Text="Zaman Seçimi" FontWeight="Bold" Foreground="#333333" FontSize="13" Margin="0,0,0,8"/>
+                    <ComboBox x:Name="cmbZamanAraligi" Width="160" SelectedIndex="0" Height="32" 
+                              SelectionChanged="Filtreler_SelectionChanged">
+                        <ComboBoxItem Content="Bugün"/>
+                        <ComboBoxItem Content="Son 1 Hafta"/>
+                        <ComboBoxItem Content="Son 1 Ay"/>
+                        <ComboBoxItem Content="Özel Aralık Seç"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel x:Name="pnlOzelTarih" Grid.Column="1" Orientation="Vertical" IsEnabled="False" Opacity="0.6" VerticalAlignment="Center" Margin="0,0,40,0">
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                        <TextBlock Text="Başlangıç :" FontSize="12" Foreground="#333333" FontWeight="Bold" Width="75" VerticalAlignment="Center"/>
+                        <DatePicker x:Name="dtBaslangic" Width="135" Height="28" SelectedDateChanged="Filtreler_SelectionChanged"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Bitiş :" FontSize="12" Foreground="#333333" FontWeight="Bold" Width="75" VerticalAlignment="Center"/>
+                        <DatePicker x:Name="dtBitis" Width="135" Height="28" SelectedDateChanged="Filtreler_SelectionChanged"/>
+                    </StackPanel>
+
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">
+                    <TextBlock Text="Varış Noktası" FontWeight="Bold" Foreground="#333333" FontSize="13" Margin="0,0,0,8"/>
+                    <ComboBox x:Name="cmbDestination" Width="160" SelectedIndex="0" Height="32" 
+                              SelectionChanged="Filtreler_SelectionChanged">
+                        <ComboBoxItem Content="Hepsi"/>
+                        <ComboBoxItem Content="Stock Area"/>
+                        <ComboBoxItem Content="Export Zone"/>
+                    </ComboBox>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="1" Margin="15,0,15,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="White" CornerRadius="12" Margin="0,0,10,0" BorderBrush="#78C802" BorderThickness="2">
+                <DockPanel>
+                    <Border DockPanel.Dock="Top" Background="#78C802" CornerRadius="10,10,0,0" Padding="12">
+                        <TextBlock Text="ÜRETİM ÖZET LİSTESİ (MASTER)" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White" FontSize="14"/>
+                    </Border>
+                    <DataGrid x:Name="dgMaster" Background="Transparent" BorderThickness="0" Margin="5"
+                              SelectionChanged="dgMaster_SelectionChanged" CanUserAddRows="False" 
+                              AutoGenerateColumns="True" RowBackground="#FAFAFA" AlternatingRowBackground="#F2F9EB"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Column="1" Background="White" CornerRadius="12" BorderBrush="#FFC202" BorderThickness="2">
+                <DockPanel>
+                    <Border DockPanel.Dock="Top" Background="#FFC202" CornerRadius="10,10,0,0" Padding="12">
+                        <TextBlock Text="DOZAJ DETAYLARI (DETAIL)" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#222222" FontSize="14"/>
+                    </Border>
+                    <DataGrid x:Name="dgDetail" Background="Transparent" BorderThickness="0" Margin="5"
+                              CanUserAddRows="False" AutoGenerateColumns="True" RowBackground="#FAFAFA" AlternatingRowBackground="#FFF9EB"/>
+                </DockPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
