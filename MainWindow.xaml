@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Data_Report"
         mc:Ignorable="d"
-        Title="Veri Raporlama Ekranı" Height="450" Width="800">
+        Title="Veri Raporlama Ekranı" 
+        Height="800" Width="1400" 
+        MinHeight="650" MinWidth="1100" 
+        WindowStartupLocation="CenterScreen">
     <Grid Background="#F8F9FA">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -22,8 +25,7 @@
 
                 <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="10,0,40,0">
                     <TextBlock Text="Zaman Seçimi" FontWeight="Bold" Foreground="#333333" FontSize="13" Margin="0,0,0,8"/>
-                    <ComboBox x:Name="cmbZamanAraligi" Width="160" SelectedIndex="0" Height="32" 
-                              SelectionChanged="Filtreler_SelectionChanged">
+                    <ComboBox Width="160" Height="32" Text="{Binding SelectedTimeRange, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBoxItem Content="Bugün"/>
                         <ComboBoxItem Content="Son 1 Hafta"/>
                         <ComboBoxItem Content="Son 1 Ay"/>
@@ -31,30 +33,39 @@
                     </ComboBox>
                 </StackPanel>
 
-                <StackPanel x:Name="pnlOzelTarih" Grid.Column="1" Orientation="Vertical" IsEnabled="False" Opacity="0.6" VerticalAlignment="Center" Margin="0,0,40,0">
+                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center" Margin="0,0,50,0">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Setter Property="Opacity" Value="0.6"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedTimeRange}" Value="Özel Aralık Seç">
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                    <Setter Property="Opacity" Value="1.0"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
 
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
                         <TextBlock Text="Başlangıç :" FontSize="12" Foreground="#333333" FontWeight="Bold" Width="75" VerticalAlignment="Center"/>
-                        <DatePicker x:Name="dtBaslangic" Width="135" Height="28" SelectedDateChanged="Filtreler_SelectionChanged"/>
+                        <DatePicker Width="135" Height="28" SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Bitiş :" FontSize="12" Foreground="#333333" FontWeight="Bold" Width="75" VerticalAlignment="Center"/>
-                        <DatePicker x:Name="dtBitis" Width="135" Height="28" SelectedDateChanged="Filtreler_SelectionChanged"/>
+                        <DatePicker Width="135" Height="28" SelectedDate="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
-
                 </StackPanel>
 
-                <StackPanel Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">
+                <StackPanel Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0">
                     <TextBlock Text="Varış Noktası" FontWeight="Bold" Foreground="#333333" FontSize="13" Margin="0,0,0,8"/>
-                    <ComboBox x:Name="cmbDestination" Width="160" SelectedIndex="0" Height="32" 
-                              SelectionChanged="Filtreler_SelectionChanged">
+                    <ComboBox Width="160" Height="32" Text="{Binding SelectedDestination, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBoxItem Content="Hepsi"/>
-                        <ComboBoxItem Content="Stock Area"/>
-                        <ComboBoxItem Content="Export Zone"/>
+                        <ComboBoxItem Content="Stock_Area"/>
+                        <ComboBoxItem Content="Export_Zone"/>
                     </ComboBox>
                 </StackPanel>
-
             </Grid>
         </Border>
 
@@ -69,9 +80,18 @@
                     <Border DockPanel.Dock="Top" Background="#78C802" CornerRadius="10,10,0,0" Padding="12">
                         <TextBlock Text="ÜRETİM ÖZET LİSTESİ (MASTER)" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White" FontSize="14"/>
                     </Border>
-                    <DataGrid x:Name="dgMaster" Background="Transparent" BorderThickness="0" Margin="5"
-                              SelectionChanged="dgMaster_SelectionChanged" CanUserAddRows="False" 
-                              AutoGenerateColumns="True" RowBackground="#FAFAFA" AlternatingRowBackground="#F2F9EB"/>
+                    <DataGrid ItemsSource="{Binding MasterList}" SelectedItem="{Binding SelectedMaster, Mode=TwoWay}" 
+                              Background="Transparent" BorderThickness="0" Margin="5"
+                              CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" 
+                              RowBackground="#FAFAFA" AlternatingRowBackground="#F2F9EB">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="BatchId" Binding="{Binding BatchId}" Width="*"/>
+                            <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat='{}{0:dd.MM.yyyy HH:mm}'}" Width="1.2*"/>
+                            <DataGridTextColumn Header="ProductionUnit" Binding="{Binding ProductionUnit}" Width="*"/>
+                            <DataGridTextColumn Header="Line" Binding="{Binding Line}" Width="*"/>
+                            <DataGridTextColumn Header="Destination" Binding="{Binding Destination}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </DockPanel>
             </Border>
 
@@ -80,8 +100,19 @@
                     <Border DockPanel.Dock="Top" Background="#FFC202" CornerRadius="10,10,0,0" Padding="12">
                         <TextBlock Text="DOZAJ DETAYLARI (DETAIL)" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#222222" FontSize="14"/>
                     </Border>
-                    <DataGrid x:Name="dgDetail" Background="Transparent" BorderThickness="0" Margin="5"
-                              CanUserAddRows="False" AutoGenerateColumns="True" RowBackground="#FAFAFA" AlternatingRowBackground="#FFF9EB"/>
+                    <DataGrid ItemsSource="{Binding DetailList}" 
+                              Background="Transparent" BorderThickness="0" Margin="5"
+                              CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" 
+                              RowBackground="#FAFAFA" AlternatingRowBackground="#FFF9EB">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="BatchId" Binding="{Binding BatchId}" Width="0.6*"/>
+                            <DataGridTextColumn Header="ScaleNo" Binding="{Binding ScaleNo}" Width="0.6*"/>
+                            <DataGridTextColumn Header="MaterialName" Binding="{Binding MaterialName}" Width="*"/>
+                            <DataGridTextColumn Header="Recipe (kg)" Binding="{Binding Recipe}" Width="*"/>
+                            <DataGridTextColumn Header="Dosed (kg)" Binding="{Binding Dosed}" Width="*"/>
+                            <DataGridTextColumn Header="Deviation (kg)" Binding="{Binding Deviation}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </DockPanel>
             </Border>
         </Grid>

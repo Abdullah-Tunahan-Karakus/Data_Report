@@ -24,8 +24,8 @@ namespace Data_Report.Models
         [Column("Destination")]
         public string Destination { get; set; }
 
-        [Column("ProductionDate")]
-        public DateTime? ProductionDate { get; set; }
+        [Column("Date")]
+        public DateTime? Date { get; set; }
 
         //Mastere Detail İlişkisinin Kurulduğu Kısım
         public virtual ICollection<ProductionDetail> Details { get; set; }

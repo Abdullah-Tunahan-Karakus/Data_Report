@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Data_Report.ViewModels;
 
 namespace Data_Report
 {
@@ -19,6 +20,7 @@ namespace Data_Report
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new MainViewMode();
         }
     }
 }

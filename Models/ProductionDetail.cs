@@ -20,7 +20,7 @@ namespace Data_Report.Models
         public string BatchId { get; set; }
 
         [Column("ScaleNo")]
-        public int? ScaleNo { get; set; }
+        public byte? ScaleNo { get; set; }
 
         [Column("MaterialNo")]
         public string MaterialNo { get; set; }
@@ -39,6 +39,6 @@ namespace Data_Report.Models
         public double? Deviation => Dosed - Recipe;
 
         [ForeignKey("BatchId")]
-        public virtual ProductionMaster Master { get; set; }
+        public virtual required ProductionMaster  Master { get; set; }
     }
 }

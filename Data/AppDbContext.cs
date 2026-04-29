@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Data_Report.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.SqlServer;
 
 namespace Data_Report.Data
 {
