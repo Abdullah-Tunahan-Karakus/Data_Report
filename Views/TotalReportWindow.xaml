@@ -1,8 +1,8 @@
 ﻿<Window x:Class="Data_Report.Views.TotalReportWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Total Report - Genel Özet" Height="700" Width="1000"
-        WindowStartupLocation="CenterScreen" Background="#F1F5F9">
+        Title="Total Report" Height="700" Width="1000"
+        WindowStartupLocation="CenterScreen" Background="#F8F9FA">
 
     <Grid Margin="15">
         <Grid.RowDefinitions>
@@ -11,7 +11,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" Background="White" CornerRadius="12" Padding="15" Margin="0,0,0,15" BorderBrush="#1E3A8A" BorderThickness="2">
+        <!-- Üst Filtre Paneli (Yeşil Çerçeveli) -->
+        <Border Grid.Row="0" Background="White" CornerRadius="12" Padding="15" Margin="0,0,0,15" BorderBrush="#78C802" BorderThickness="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -20,7 +21,7 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="10,0,40,0">
-                    <TextBlock Text="Zaman Seçimi" FontWeight="Bold" Foreground="#1E293B" FontSize="13" Margin="0,0,0,8"/>
+                    <TextBlock Text="Zaman Seçimi" FontWeight="Bold" Foreground="#333333" FontSize="13" Margin="0,0,0,8"/>
                     <ComboBox Width="160" Height="32" Text="{Binding SelectedTimeRange, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBoxItem Content="Bugün"/>
                         <ComboBoxItem Content="Son 1 Hafta"/>
@@ -44,18 +45,18 @@
                     </StackPanel.Style>
 
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                        <TextBlock Text="Başlangıç :" FontSize="12" Foreground="#1E293B" FontWeight="Bold" Width="75" VerticalAlignment="Center"/>
+                        <TextBlock Text="Başlangıç :" FontSize="12" Foreground="#333333" FontWeight="Bold" Width="75" VerticalAlignment="Center"/>
                         <DatePicker Width="135" Height="28" SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Bitiş :" FontSize="12" Foreground="#1E293B" FontWeight="Bold" Width="75" VerticalAlignment="Center"/>
+                        <TextBlock Text="Bitiş :" FontSize="12" Foreground="#333333" FontWeight="Bold" Width="75" VerticalAlignment="Center"/>
                         <DatePicker Width="135" Height="28" SelectedDate="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                 </StackPanel>
 
                 <StackPanel Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0">
-                    <TextBlock Text="Varış Noktası" FontWeight="Bold" Foreground="#1E293B" FontSize="13" Margin="0,0,0,8"/>
+                    <TextBlock Text="Varış Noktası" FontWeight="Bold" Foreground="#333333" FontSize="13" Margin="0,0,0,8"/>
                     <ComboBox Width="160" Height="32" Text="{Binding SelectedDestination, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBoxItem Content="Hepsi"/>
                         <ComboBoxItem Content="Stock_Area"/>
@@ -65,14 +66,15 @@
             </Grid>
         </Border>
 
-        <Border Grid.Row="1" Background="White" CornerRadius="12" BorderBrush="#0891B2" BorderThickness="2">
+        <!-- Ana Tablo (Sarı Çerçeveli, İlk Ekrandaki Detail Tablosu Gibi) -->
+        <Border Grid.Row="1" Background="White" CornerRadius="12" BorderBrush="#FFC202" BorderThickness="2">
             <DataGrid ItemsSource="{Binding ReportList}" AutoGenerateColumns="False" IsReadOnly="True" 
                       Background="Transparent" BorderThickness="0" Margin="5" 
-                      RowBackground="#FFFFFF" AlternatingRowBackground="#F0F9FF" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#E2E8F0">
+                      RowBackground="#FAFAFA" AlternatingRowBackground="#FFF9EB" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#EAEAEA">
                 <DataGrid.Resources>
                     <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Background" Value="#0891B2"/>
-                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Background" Value="#FFC202"/>
+                        <Setter Property="Foreground" Value="#222222"/>
                         <Setter Property="FontWeight" Value="Bold"/>
                         <Setter Property="Padding" Value="10,5"/>
                         <Setter Property="Height" Value="35"/>
@@ -87,7 +89,8 @@
             </DataGrid>
         </Border>
 
-        <Border Grid.Row="2" Background="#0F172A" CornerRadius="10" Padding="20" Margin="0,15,0,0">
+        <!-- Alt Toplam Paneli -->
+        <Border Grid.Row="2" Background="#333333" CornerRadius="10" Padding="20" Margin="0,15,0,0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -96,18 +99,18 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-                    <TextBlock Text="TOPLAM REÇETE" Foreground="#93C5FD" FontSize="12" FontWeight="Bold"/>
+                    <TextBlock Text="GENEL REÇETE" Foreground="#78C802" FontSize="12" FontWeight="Bold"/>
                     <TextBlock Text="{Binding GrandTotalRecipe, StringFormat={}{0:N2} kg}" Foreground="White" FontSize="22" FontWeight="Bold"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-                    <TextBlock Text="TOPLAM DOZAJ" Foreground="#22D3EE" FontSize="12" FontWeight="Bold" />
+                    <TextBlock Text="GENEL DOZAJ" Foreground="#FFC202" FontSize="12" FontWeight="Bold"/>
                     <TextBlock Text="{Binding GrandTotalDosed, StringFormat={}{0:N2} kg}" Foreground="White" FontSize="22" FontWeight="Bold"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="2" HorizontalAlignment="Center">
-                    <TextBlock Text="TOPLAM SAPMA" Foreground="#F43F5E" FontSize="12" FontWeight="Bold" Opacity="0.9"/>
-                    <TextBlock Text="{Binding GrandTotalDeviation, StringFormat={}{0:N2} kg}" Foreground="White" FontSize="22" FontWeight="Bold"/>
+                    <TextBlock Text="GENEL SAPMA (FARK)" Foreground="White" FontSize="12" FontWeight="Bold" Opacity="0.7"/>
+                    <TextBlock Text="{Binding GrandTotalDeviation, StringFormat={}{0:N2} kg}" Foreground="#FF4444" FontSize="22" FontWeight="Bold"/>
                 </StackPanel>
             </Grid>
         </Border>
