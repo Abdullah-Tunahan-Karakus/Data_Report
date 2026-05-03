@@ -2,7 +2,7 @@
 
 Bu proje, fabrika ortamındaki üretim hatlarının, batch (parti) bazlı üretimlerin ve hammadde dozajlama işlemlerinin detaylı analizini sunan, **C# WPF** ve **MVVM** mimarisi kullanılarak geliştirilmiş profesyonel bir masaüstü raporlama uygulamasıdır.
 
-## ✨ Öne Çıkan Özellikler
+##  Öne Çıkan Özellikler
 
 - **Gelişmiş MVVM Mimarisi:** Spagetti koddan uzak, tamamen `CommunityToolkit.Mvvm` ile yönetilen, sürdürülebilir ve test edilebilir altyapı.
 - **Master-Detail Veri Görselleştirme:** Üretim özetleri (Master) ve o üretime ait kantar/malzeme bazlı dozaj detaylarının (Detail) senkronize ve anlık gösterimi.
@@ -10,7 +10,7 @@ Bu proje, fabrika ortamındaki üretim hatlarının, batch (parti) bazlı üreti
 - **Dinamik Zaman ve Hedef Filtreleme:** "Bugün", "Son 1 Hafta", "Son 1 Ay" veya "Özel Tarih Aralığı" gibi hızlı filtreleme seçenekleri ve üretim varış noktasına (Stock Area / Export Zone) göre anlık sorgulama.
 - **Endüstriyel UI/UX Tasarımı:** Kullanıcıyı yormayan, yüksek kontrastlı ve okunabilir modern SCADA tema konsepti.
 
-## 🛠️ Kullanılan Teknolojiler
+##  Kullanılan Teknolojiler
 
 - **Dil:** C# (.NET 6 / 8)
 - **Arayüz (UI):** WPF (Windows Presentation Foundation)
@@ -18,7 +18,7 @@ Bu proje, fabrika ortamındaki üretim hatlarının, batch (parti) bazlı üreti
 - **ORM / Veritabanı:** Entity Framework Core
 - **Paketler:** `CommunityToolkit.Mvvm`, `Microsoft.EntityFrameworkCore`
 
-## 📂 Proje Mimarisi (Klasör Yapısı)
+##  Proje Mimarisi (Klasör Yapısı)
 
 Proje, kurumsal standartlara uygun olarak katmanlı bir şekilde tasarlanmıştır:
 ```text
@@ -30,7 +30,7 @@ Proje, kurumsal standartlara uygun olarak katmanlı bir şekilde tasarlanmışt�
  ┗ 📄 App.xaml     # Uygulama başlangıç noktası
 ```
 
-## 🚀 Ekran Görüntüleri
+##  Ekran Görüntüleri
 
 ### 1. Ana Dashboard
 <img width="886" height="593" alt="Ekran görüntüsü 2026-04-30 143047" src="https://github.com/user-attachments/assets/668a6df9-1f8b-41fe-b1b1-446d7dc525f5" />
@@ -44,7 +44,7 @@ Proje, kurumsal standartlara uygun olarak katmanlı bir şekilde tasarlanmışt�
 <img width="986" height="693" alt="Ekran görüntüsü 2026-04-30 143136" src="https://github.com/user-attachments/assets/5d3d0568-e299-43bb-b8b0-4b3636970846" />
 
 
-## ⚙️ Kurulum ve Çalıştırma
+##  Kurulum ve Çalıştırma
 
 Projeyi kendi bilgisayarınızda çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
 
@@ -57,6 +57,6 @@ Projeyi kendi bilgisayarınızda çalıştırmak için aşağıdaki adımları i
 4. Veritabanı bağlantı cümlenizi `AppDbContext.cs` içinden kendi sisteminize göre güncelleyin.
 5. **F5** veya **Start** butonuna basarak projeyi derleyip çalıştırın.
 
-## 🤝 Katkıda Bulunma
+##  Katkıda Bulunma
 
 Bu proje geliştirmeye açıktır. Katkıda bulunmak isterseniz lütfen bir PR (Pull Request) açmaktan çekinmeyin.
